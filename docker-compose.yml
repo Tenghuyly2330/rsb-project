@@ -1,0 +1,72 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:6.0
+    container_name: book_sys_mongodb
+    restart: always
+    ports:
+      - "27017:27017"
+    environment:
+      - MONGO_INITDB_DATABASE=bookdb
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - book_network
+    healthcheck:
+      test: [ "CMD", "mongosh", "--eval", "db.runCommand({ping: 1})" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: book_sys_backend
+    ports:
+      - "5000:5000"
+    environment:
+      PORT: 5000
+      MONGODB_URI: mongodb://mongodb:27017/bookdb
+      JWT_SECRET: ${JWT_SECRET:-change_me_in_production}
+      NODE_ENV: production
+    depends_on:
+      mongodb:
+        condition: service_healthy
+    networks:
+      - book_network
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: book_sys_frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+    networks:
+      - book_network
+    restart: unless-stopped
+
+  admin-dashboard:
+    build:
+      context: ./admin-dashboard
+      dockerfile: Dockerfile
+    container_name: book_sys_admin
+    ports:
+      - "81:80"
+    depends_on:
+      - backend
+    networks:
+      - book_network
+    restart: unless-stopped
+
+networks:
+  book_network:
+    driver: bridge
+
+volumes:
+  mongodb_data:
