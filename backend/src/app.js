@@ -14,6 +14,10 @@ dns.setServers(['8.8.8.8', '1.1.1.1']);
 
 const app = express();
 
+app.get('/health', (req, res) => {
+  res.send({ message: 'OK', timestamp: new Date().toISOString() });
+});
+
 // Security middleware
 app.use(helmet());
 app.use(cors());

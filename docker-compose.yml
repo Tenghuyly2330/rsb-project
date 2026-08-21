@@ -3,7 +3,7 @@ version: '3.8'
 services:
   mongodb:
     image: mongo:6.0
-    container_name: book_sys_mongodb
+    container_name: rsb-mongodb
     restart: always
     ports:
       - "27017:27017"
@@ -23,7 +23,7 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    container_name: book_sys_backend
+    container_name: rsb-backend
     ports:
       - "5000:5000"
     environment:
@@ -42,7 +42,7 @@ services:
     build:
       context: ./frontend
       dockerfile: Dockerfile
-    container_name: book_sys_frontend
+    container_name: rsb-frontend
     ports:
       - "80:80"
     depends_on:
@@ -55,7 +55,7 @@ services:
     build:
       context: ./admin-dashboard
       dockerfile: Dockerfile
-    container_name: book_sys_admin
+    container_name: rsb-admin-dashboard
     ports:
       - "81:80"
     depends_on:
