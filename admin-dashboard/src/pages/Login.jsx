@@ -32,7 +32,7 @@ const Login = () => {
                               <div className="inline-flex p-3 bg-indigo-600/10 text-indigo-500 rounded-2xl border border-indigo-500/20 mb-2">
                                     <ShieldAlert size={32} />
                               </div>
-                              <h1 className="text-2xl font-bold text-white">Admin Access 1</h1>
+                              <h1 className="text-2xl font-bold text-white">Admin Access</h1>
                               <p className="text-slate-400 text-sm">Sign in to control rest-book management dashboard</p>
                         </div>
 
