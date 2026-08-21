@@ -97,7 +97,7 @@ const Books = () => {
                   <div className="mb-10 text-center">
                         <h1 className="text-4xl font-extrabold tracking-tight mb-2">
                               <span className="bg-gradient-to-r from-blue-600 to-violet-600 bg-clip-text text-transparent">
-                                    Explore Books
+                                    Explore Books testing
                               </span>
                         </h1>
                         <p className="text-slate-500 dark:text-slate-400 text-sm">
