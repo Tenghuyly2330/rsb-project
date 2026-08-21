@@ -65,7 +65,7 @@ jobs:
   #         cache-to: type=gha,mode=max
 
 
-  # 2. Deploy Frontend to Vercel
+  # 2. Deploy Frontend to Vercel (test)
   deploy-frontend:
     name: Deploy Frontend to Vercel
     runs-on: ubuntu-latest
